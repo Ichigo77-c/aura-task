@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "created": "2026-11-11T22:05:40Z",
+  "last_sync": "2026-11-11T22:30:00Z",
+  "participants": [
+    {
+      "id": "claude",
+      "name": "Claude Code (VS Code)",
+      "role": "Primary AI - Planning & Analysis",
+      "capabilities": ["coding", "analysis", "planning", "design", "documentation"]
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode CLI",
+      "role": "Secondary AI - Execution & Testing",
+      "capabilities": ["terminal", "git", "npm", "build", "test", "deployment"]
+    }
+  ],
+  "current_project": {
+    "name": "Aura Tasks",
+    "version": "1.0.0",
+    "status": "production_ready",
+    "url": "https://taskflow-henna-phi.vercel.app",
+    "local_url": "http://localhost:3000"
+  },
+  "shared_context": {
+    "last_sync": "2026-11-11T22:30:00Z",
+    "active_tasks": [
+      {
+        "id": "deploy-v1",
+        "title": "Deploy Aura Tasks v1.0.0 to Vercel",
+        "status": "in_progress",
+        "assigned_to": "opencode",
+        "blocked_by": "git_install"
+      },
+      {
+        "id": "projects-boards",
+        "title": "Projects and Boards pages",
+        "status": "in_progress",
+        "assigned_to": "claude",
+        "blocked_by": null
+      }
+    ],
+    "recent_decisions": [
+      {
+        "timestamp": "2026-11-11T20:40:00Z",
+        "by": "claude",
+        "decision": "Fix dark theme with tailwind.config.ts + layout.tsx + globals.css",
+        "status": "done"
+      },
+      {
+        "timestamp": "2026-11-11T21:00:00Z",
+        "by": "opencode",
+        "decision": "Fix TypeScript errors in lib/email.ts (unknown type)",
+        "status": "done"
+      },
+      {
+        "timestamp": "2026-11-11T22:00:00Z",
+        "by": "both",
+        "decision": "Set up One Brain pairing protocol",
+        "status": "done"
+      }
+    ],
+    "learnings": [
+      "Build passes after fixing lib/email.ts",
+      "Git needs admin to install on this machine",
+      "Prisma client locks during dev server - stop dev server before prisma generate"
+    ]
+  },
+  "communication_protocol": {
+    "method": "file_based",
+    "sync_file": "SHARED_MEMORY.json",
+    "conflict_resolution": "consensus",
+    "decision_log": true
+  },
+  "task_status": {
+    "claude": {
+      "current_task": "Projects and boards pages",
+      "last_completed": "Dark theme fix + documentation",
+      "next_action": null
+    },
+    "opencode": {
+      "current_task": "Git install + deployment prep",
+      "last_completed": "TypeScript fixes + build verification",
+      "next_action": "git commit + push after install completes"
+    }
+  }
+}

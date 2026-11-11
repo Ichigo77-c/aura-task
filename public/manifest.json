@@ -1,0 +1,17 @@
+{
+  "name": "Aura Tasks - Modern Project & Task Management",
+  "short_name": "Aura Tasks",
+  "description": "Elevate your workflow with stunning kanban boards and aura collaboration",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+/* ========================================
+   🎨 CRITICAL: Force dark mode for Aura Tasks
+   Works with both data-theme="dark" and class="dark"
+   ======================================== */
+
+/* Tailwind's built-in `dark:` follows the OS preference, so point it at our
+   own `data-theme` attribute instead. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
+/* ========================================
+   🎨 Aura Tasks — Theme tokens
+   Dark = default (as before), light = opt-in.
+   ======================================== */
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-strong: var(--fg-strong);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  color-scheme: dark;
+
+  /* Dark palette (default) */
+  --surface: #020617;
+  --surface-soft: #0f172a;
+  --line: #1e293b;
+  --line-strong: #334155;
+  --fg: #f1f5f9;
+  --fg-strong: #ffffff;
+  --muted: #94a3b8;
+  --muted-soft: #cbd5e1;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --surface: #f8fafc;
+  --surface-soft: #ffffff;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --fg: #0f172a;
+  --fg-strong: #020617;
+  --muted: #475569;
+  --muted-soft: #334155;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--fg);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Theme toggle: swap sun / moon without hydration flicker */
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon-moon {
+  display: block;
+}
+
+/* ========================================
+   🎨 Aura Tasks - Interactive Mouse Physics & 3D Tilt
+   ======================================== */
+
+/* 3D Tilt Perspective */
+.perspective-container {
+  perspective: 1000px;
+}
+
+/* Mouse Interactive Magnetic Card */
+.mouse-interactive-card {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+}
+
+.mouse-interactive-card:hover {
+  transform: translateY(-6px) scale(1.02) rotateX(1deg);
+  box-shadow: 0 16px 32px -8px rgba(99, 102, 241, 0.18), 0 0 0 1px rgba(99, 102, 241, 0.3);
+}
+
+.mouse-interactive-card:active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: 0.1s;
+}
+
+/* Magnetic Button (Snappy & Responsive) */
+.mouse-btn {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.mouse-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.mouse-btn:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Interactive Column Hover (Kanban) */
+.kanban-col-interactive {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kanban-col-interactive:hover {
+  background-color: rgba(243, 244, 246, 0.95);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .kanban-col-interactive:hover {
+  background-color: rgba(30, 41, 59, 0.55);
+  border-color: rgba(129, 140, 248, 0.28);
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.55);
+}
+
+/* Keep native form controls (select, scrollbars...) consistent per theme */
+[data-theme="dark"] select option {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+/* Interactive Icon Hover */
+.mouse-icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.group:hover .mouse-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Subtle Cursor Glow / Spotlight */
+.aura-spotlight {
+  background: radial-gradient(600px circle at var(--mouse-x, 100px) var(--mouse-y, 100px), rgba(99, 102, 241, 0.08), transparent 40%);
+}
+
+/* Floating Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Fast Ripple click */
+.click-pop:active {
+  transform: scale(0.94);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   🌌 Aura Command palette
+   ======================================== */
+
+@keyframes commandBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes commandPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes taskHighlightPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5);
+    border-color: rgba(99, 102, 241, 0.85);
+  }
+  55% {
+    box-shadow: 0 0 0 7px rgba(99, 102, 241, 0);
+    border-color: rgba(99, 102, 241, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    border-color: rgba(99, 102, 241, 0.6);
+  }
+}
+
+.command-palette-backdrop {
+  animation: commandBackdropIn 0.16s ease-out both;
+}
+
+.command-palette-panel {
+  animation: commandPanelIn 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.command-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.command-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.command-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.command-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.task-highlight {
+  animation: taskHighlightPulse 1.5s ease-out 2;
+  border-color: rgba(99, 102, 241, 0.65);
+  background-color: rgba(99, 102, 241, 0.07);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.14), 0 12px 30px -14px rgba(99, 102, 241, 0.55);
+}
+
+.task-highlight::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: #6366f1;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+}
+
+[data-theme="dark"] .task-highlight {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .command-palette-backdrop,
+  .command-palette-panel,
+  .task-highlight {
+    animation: none !important;
+  }
+}

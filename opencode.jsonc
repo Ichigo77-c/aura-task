@@ -1,0 +1,456 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "omniroute/agnes-3.0-flash-xhigh",
+
+  "providers": {
+    "omniroute": {
+      "name": "OmniRoute (local)",
+      "env": ["OMNIROUTE_API_KEY"],
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "http://localhost:20128/v1"
+      },
+      "models": {
+        // ═══════════════════════════════════════════════
+        // Agnes - Local, Free, Fast
+        // ═══════════════════════════════════════════════
+        "agnes-3.0-flash-xhigh": {
+          "name": "Agnes 3.0 Flash Xhigh",
+          "modelID": "agnes/agnes-3.0-flash-xhigh"
+        },
+        "agnes-3.0-flash-max": {
+          "name": "Agnes 3.0 Flash Max",
+          "modelID": "agnes/agnes-3.0-flash-max"
+        },
+        "agnes-3.0-flash-high": {
+          "name": "Agnes 3.0 Flash High",
+          "modelID": "agnes/agnes-3.0-flash-high"
+        },
+        "agnes-3.0-flash-medium": {
+          "name": "Agnes 3.0 Flash Medium",
+          "modelID": "agnes/agnes-3.0-flash-medium"
+        },
+        "agnes-3.0-flash-low": {
+          "name": "Agnes 3.0 Flash Low",
+          "modelID": "agnes/agnes-3.0-flash-low"
+        },
+        "agnes-3.0-flash-minimal": {
+          "name": "Agnes 3.0 Flash Minimal",
+          "modelID": "agnes/agnes-3.0-flash-minimal"
+        },
+        "agnes-3.0-flash-none": {
+          "name": "Agnes 3.0 Flash None",
+          "modelID": "agnes/agnes-3.0-flash-none"
+        },
+        "agnes-2.5-flash-max": {
+          "name": "Agnes 2.5 Flash Max",
+          "modelID": "agnes/agnes-2.5-flash-max"
+        },
+        "agnes-2.5-flash-high": {
+          "name": "Agnes 2.5 Flash High",
+          "modelID": "agnes/agnes-2.5-flash-high"
+        },
+        "agnes-2.5-flash-medium": {
+          "name": "Agnes 2.5 Flash Medium",
+          "modelID": "agnes/agnes-2.5-flash-medium"
+        },
+        "agnes-2.5-flash-low": {
+          "name": "Agnes 2.5 Flash Low",
+          "modelID": "agnes/agnes-2.5-flash-low"
+        },
+        "agnes-2.5-flash-none": {
+          "name": "Agnes 2.5 Flash None",
+          "modelID": "agnes/agnes-2.5-flash-none"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Auto Routing - Smart Model Selection
+        // ═══════════════════════════════════════════════
+        "auto-best-coding": {
+          "name": "Auto Best Coding",
+          "modelID": "auto/best-coding"
+        },
+        "auto-best-reasoning": {
+          "name": "Auto Best Reasoning",
+          "modelID": "auto/best-reasoning"
+        },
+        "auto-best-fast": {
+          "name": "Auto Best Fast",
+          "modelID": "auto/best-fast"
+        },
+        "auto-best-vision": {
+          "name": "Auto Best Vision",
+          "modelID": "auto/best-vision"
+        },
+        "auto-best-chat": {
+          "name": "Auto Best Chat",
+          "modelID": "auto/best-chat"
+        },
+        "auto-pro-coding": {
+          "name": "Auto Pro Coding",
+          "modelID": "auto/pro-coding"
+        },
+        "auto-pro-reasoning": {
+          "name": "Auto Pro Reasoning",
+          "modelID": "auto/pro-reasoning"
+        },
+        "auto-sonnet": {
+          "name": "Auto Claude Sonnet",
+          "modelID": "auto/claude-sonnet"
+        },
+        "auto-haiku": {
+          "name": "Auto Claude Haiku",
+          "modelID": "auto/claude-haiku"
+        },
+        "auto-opus": {
+          "name": "Auto Claude Opus",
+          "modelID": "auto/claude-opus"
+        },
+
+        // ═══════════════════════════════════════════════
+        // LLM7.io - Claude
+        // ═══════════════════════════════════════════════
+        "llm7-claude-sonnet-5": {
+          "name": "Claude Sonnet 5 (llm7)",
+          "modelID": "llm7/claude-sonnet-5"
+        },
+        "llm7-claude-sonnet-5-high": {
+          "name": "Claude Sonnet 5 High (llm7)",
+          "modelID": "llm7/claude-sonnet-5-high"
+        },
+        "llm7-claude-sonnet-5-xhigh": {
+          "name": "Claude Sonnet 5 Xhigh (llm7)",
+          "modelID": "llm7/claude-sonnet-5-xhigh"
+        },
+        "llm7-claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6 (llm7)",
+          "modelID": "llm7/claude-sonnet-4-6"
+        },
+        "llm7-claude-sonnet-4-6-high": {
+          "name": "Claude Sonnet 4.6 High (llm7)",
+          "modelID": "llm7/claude-sonnet-4-6-high"
+        },
+        "llm7-claude-haiku-5-5": {
+          "name": "Claude Haiku 5.5 (llm7)",
+          "modelID": "llm7/claude-haiku-5-5"
+        },
+        "llm7-claude-haiku-5-5-high": {
+          "name": "Claude Haiku 5.5 High (llm7)",
+          "modelID": "llm7/claude-haiku-5-5-high"
+        },
+        "llm7-claude-opus-5": {
+          "name": "Claude Opus 5 (llm7)",
+          "modelID": "llm7/claude-opus-5"
+        },
+        "llm7-claude-opus-5-xhigh": {
+          "name": "Claude Opus 5 Xhigh (llm7)",
+          "modelID": "llm7/claude-opus-5-xhigh"
+        },
+        "llm7-claude-opus-4-8": {
+          "name": "Claude Opus 4.8 (llm7)",
+          "modelID": "llm7/claude-opus-4-8"
+        },
+
+        // ═══════════════════════════════════════════════
+        // LLM7.io - GPT
+        // ═══════════════════════════════════════════════
+        "llm7-gpt-5-6-sol": {
+          "name": "GPT-5.6 Sol (llm7)",
+          "modelID": "llm7/gpt-5.6-sol"
+        },
+        "llm7-gpt-5-6-luna": {
+          "name": "GPT-5.6 Luna (llm7)",
+          "modelID": "llm7/gpt-5.6-luna"
+        },
+        "llm7-gpt-6-sol": {
+          "name": "GPT-6 Sol (llm7)",
+          "modelID": "llm7/gpt-6-sol"
+        },
+        "llm7-gpt-6-luna": {
+          "name": "GPT-6 Luna (llm7)",
+          "modelID": "llm7/gpt-6-luna"
+        },
+        "llm7-gpt-6-astra": {
+          "name": "GPT-6 Astra (llm7)",
+          "modelID": "llm7/gpt-6-astra"
+        },
+
+        // ═══════════════════════════════════════════════
+        // LLM7.io - Gemini
+        // ═══════════════════════════════════════════════
+        "llm7-gemini-3-8-flash-high": {
+          "name": "Gemini 3.8 Flash High (llm7)",
+          "modelID": "llm7/gemini-3.8-flash-high"
+        },
+        "llm7-gemini-3-6-flash-high": {
+          "name": "Gemini 3.6 Flash High (llm7)",
+          "modelID": "llm7/gemini-3.6-flash-high"
+        },
+        "llm7-gemini-3-1-pro": {
+          "name": "Gemini 3.1 Pro (llm7)",
+          "modelID": "llm7/gemini-3.1-pro"
+        },
+
+        // ═══════════════════════════════════════════════
+        // LLM7.io - DeepSeek
+        // ═══════════════════════════════════════════════
+        "llm7-deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro (llm7)",
+          "modelID": "llm7/deepseek-v4-pro"
+        },
+        "llm7-deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash:0731 (llm7)",
+          "modelID": "llm7/deepseek-v4-flash:0731"
+        },
+        "llm7-deepseek-v4-1-flash": {
+          "name": "DeepSeek V4.1 Flash (llm7)",
+          "modelID": "llm7/deepseek-v4.1-flash"
+        },
+
+        // ═══════════════════════════════════════════════
+        // LLM7.io - Other
+        // ═══════════════════════════════════════════════
+        "llm7-kimi-k3": {
+          "name": "Kimi K3 (llm7)",
+          "modelID": "llm7/kimi-k3"
+        },
+        "llm7-kimi-k2-7-code": {
+          "name": "Kimi K2.7 Code (llm7)",
+          "modelID": "llm7/kimi-k2.7-code"
+        },
+        "llm7-grok-4-7": {
+          "name": "Grok 4.7 (llm7)",
+          "modelID": "llm7/grok-4.7"
+        },
+        "llm7-glm-5-3": {
+          "name": "GLM 5.3 (llm7)",
+          "modelID": "llm7/glm-5.3"
+        },
+        "llm7-codestral-latest": {
+          "name": "Codestral Latest (llm7)",
+          "modelID": "llm7/codestral-latest"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Gemini Provider
+        // ═══════════════════════════════════════════════
+        "gemini-3-8-flash": {
+          "name": "Gemini 3.8 Flash",
+          "modelID": "gemini/gemini-3.8-flash"
+        },
+        "gemini-3-7-flash": {
+          "name": "Gemini 3.7 Flash",
+          "modelID": "gemini/gemini-3.7-flash"
+        },
+        "gemini-3-6-flash": {
+          "name": "Gemini 3.6 Flash",
+          "modelID": "gemini/gemini-3.6-flash"
+        },
+        "gemini-3-flash-preview": {
+          "name": "Gemini 3 Flash Preview",
+          "modelID": "gemini/gemini-3-flash-preview"
+        },
+        "gemini-flash-latest": {
+          "name": "Gemini Flash Latest",
+          "modelID": "gemini/gemini-flash-latest"
+        },
+        "gemini-pro-latest": {
+          "name": "Gemini Pro Latest",
+          "modelID": "gemini/gemini-pro-latest"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Kiro AI
+        // ═══════════════════════════════════════════════
+        "kiro-auto": {
+          "name": "Kiro Auto",
+          "modelID": "kiro/auto"
+        },
+        "kiro-claude-sonnet-4-5": {
+          "name": "Claude Sonnet 4.5 (Kiro)",
+          "modelID": "kiro/claude-sonnet-4.5"
+        },
+        "kiro-claude-sonnet-4-5-high": {
+          "name": "Claude Sonnet 4.5 High (Kiro)",
+          "modelID": "kiro/claude-sonnet-4.5-high"
+        },
+        "kiro-claude-sonnet-4-5-medium": {
+          "name": "Claude Sonnet 4.5 Medium (Kiro)",
+          "modelID": "kiro/claude-sonnet-4.5-medium"
+        },
+        "kiro-claude-sonnet-4-5-low": {
+          "name": "Claude Sonnet 4.5 Low (Kiro)",
+          "modelID": "kiro/claude-sonnet-4.5-low"
+        },
+        "kiro-claude-haiku-4-5": {
+          "name": "Claude Haiku 4.5 (Kiro)",
+          "modelID": "kiro/claude-haiku-4.5"
+        },
+        "kiro-claude-haiku-4-5-high": {
+          "name": "Claude Haiku 4.5 High (Kiro)",
+          "modelID": "kiro/claude-haiku-4.5-high"
+        },
+        "kiro-claude-haiku-4-5-medium": {
+          "name": "Claude Haiku 4.5 Medium (Kiro)",
+          "modelID": "kiro/claude-haiku-4.5-medium"
+        },
+        "kiro-claude-haiku-4-5-low": {
+          "name": "Claude Haiku 4.5 Low (Kiro)",
+          "modelID": "kiro/claude-haiku-4.5-low"
+        },
+        "kiro-deepseek-3-2": {
+          "name": "DeepSeek V3.2 (Kiro)",
+          "modelID": "kiro/deepseek-3.2"
+        },
+        "kiro-minimax-m2-5": {
+          "name": "MiniMax M2.5 (Kiro)",
+          "modelID": "kiro/minimax-m2.5"
+        },
+        "kiro-minimax-m2-1": {
+          "name": "MiniMax M2.1 (Kiro)",
+          "modelID": "kiro/minimax-m2.1"
+        },
+        "kiro-glm-5": {
+          "name": "GLM-5 (Kiro)",
+          "modelID": "kiro/glm-5"
+        },
+        "kiro-qwen3-coder-next": {
+          "name": "Qwen3 Coder Next (Kiro)",
+          "modelID": "kiro/qwen3-coder-next"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Groq (Fast Inference)
+        // ═══════════════════════════════════════════════
+        "groq-qwen3-8-27b": {
+          "name": "Qwen 3.8 27B (Groq)",
+          "modelID": "groq/qwen/qwen3.8-27b"
+        },
+        "groq-gpt-oss-20b": {
+          "name": "GPT-OSS 20B (Groq)",
+          "modelID": "groq/openai/gpt-oss-20b"
+        },
+        "groq-gpt-oss-120b": {
+          "name": "GPT-OSS 120B (Groq)",
+          "modelID": "groq/openai/gpt-oss-120b"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Mistral
+        // ═══════════════════════════════════════════════
+        "mistral-codestral": {
+          "name": "Codestral (Mistral)",
+          "modelID": "mistral/mistral-code-latest"
+        },
+        "mistral-medium": {
+          "name": "Mistral Medium (Mistral)",
+          "modelID": "mistral/mistral-medium-latest"
+        },
+        "mistral-large": {
+          "name": "Mistral Large 4 (Mistral)",
+          "modelID": "mistral/mistral-large-4"
+        },
+
+        // ═══════════════════════════════════════════════
+        // AgentRouter
+        // ═══════════════════════════════════════════════
+        "agentrouter-gpt-5-6-sol": {
+          "name": "GPT-5.6 Sol (AgentRouter)",
+          "modelID": "agentrouter/gpt-5.6-sol"
+        },
+
+        // ═══════════════════════════════════════════════
+        // Ollama Cloud
+        // ═══════════════════════════════════════════════
+        "ollama-gemma4-31b": {
+          "name": "Gemma 4 31B (Ollama)",
+          "modelID": "ollama-cloud/gemma4:31b"
+        },
+        "ollama-kimi-k2-6": {
+          "name": "Kimi K2.6 (Ollama)",
+          "modelID": "ollama-cloud/kimi-k2.6"
+        },
+        "ollama-nemotron-3-super": {
+          "name": "NVIDIA Nemotron 3 Super (Ollama)",
+          "modelID": "ollama-cloud/nemotron-3-super"
+        },
+
+        // ═══════════════════════════════════════════════
+        // NVIDIA NIM
+        // ═══════════════════════════════════════════════
+        "nvidia-deepseek-v4-1-flash": {
+          "name": "DeepSeek V4.1 Flash (NVIDIA)",
+          "modelID": "nvidia/deepseek-v4.1-flash"
+        },
+        "nvidia-glm-5-3-flash": {
+          "name": "GLM 5.3 Flash (NVIDIA)",
+          "modelID": "nvidia/glm-5.3-flash"
+        },
+        "nvidia-kimi-k2-6": {
+          "name": "Kimi K2.6 (NVIDIA)",
+          "modelID": "nvidia/kimi-k2.6"
+        },
+        "nvidia-llama-3-3-70b": {
+          "name": "Llama 3.3 70B (NVIDIA)",
+          "modelID": "nvidia/llama-3.1-nemotron-70b-instruct"
+        },
+        "nvidia-mistral-large": {
+          "name": "Mistral Large (NVIDIA)",
+          "modelID": "nvidia/mistral-large"
+        },
+        "nvidia-nemotron-3-ultra": {
+          "name": "Nemotron 3 Ultra 550B (NVIDIA)",
+          "modelID": "nvidia/nemotron-3-ultra-550b-a55b"
+        },
+        "nvidia-gemini-flash": {
+          "name": "GPT-OSS 20B (NVIDIA)",
+          "modelID": "nvidia/gpt-oss-20b"
+        },
+
+        // ═══════════════════════════════════════════════
+        // HuggingFace
+        // ═══════════════════════════════════════════════
+        "hf-deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash (HF)",
+          "modelID": "hf/DeepSeek-V4-Flash"
+        },
+        "hf-deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro (HF)",
+          "modelID": "hf/DeepSeek-V4-Pro"
+        },
+        "hf-deepseek-r1": {
+          "name": "DeepSeek R1 (HF)",
+          "modelID": "hf/DeepSeek-R1"
+        },
+        "hf-glm-5-3-flash": {
+          "name": "GLM 5.3 Flash (HF)",
+          "modelID": "hf/GLM-5.3-Flash-BF16"
+        },
+        "hf-kimi-k3": {
+          "name": "Kimi K3 (HF)",
+          "modelID": "hf/Kimi-K3"
+        },
+        "hf-qwen3-8-27b": {
+          "name": "Qwen 3.8 27B (HF)",
+          "modelID": "hf/Qwen3.8-27B"
+        },
+        "hf-qwen3-8-flash": {
+          "name": "Qwen 3.8 Flash Next (HF)",
+          "modelID": "hf/Qwen3.8-Flash-Next-FP8"
+        },
+        "hf-llama-3-3-70b": {
+          "name": "Llama 3.3 70B (HF)",
+          "modelID": "hf/Llama-3.3-70B-Instruct"
+        },
+        "hf-gemma-4-31b": {
+          "name": "Gemma 4 31B (HF)",
+          "modelID": "hf/gemma-4-31B-it"
+        },
+        "hf-gpt-oss-120b": {
+          "name": "GPT-OSS 120B (HF)",
+          "modelID": "hf/gpt-oss-120b"
+        }
+      }
+    }
+  }
+}
