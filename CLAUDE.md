@@ -50,10 +50,13 @@ Hada fichier kansajjlo fih kolchi li drna f l-projet bach mni t-t-mha l-chat wla
 - **Docs**: `.claude/sync/README.md`.
 - **Sécurité**: ma-t-directch `.env` wla credentials. Redaction best-effort kayn walakin
   machi garantie.
-- **Worker simulator**: `opencode-worker.ts` ghir simulator (result predefined, ma-kay-3ayetsh
-  l-OpenCode CLI). L-integration l-79i9ia = plugin + `room-daemon.ts`.
+- **Worker (executor)**: `opencode-worker.ts` kay-nfEd tasks b l-OpenCode CLI l-79i9i
+  (`opencode run --format json`, prompt 3la stdin) w kay-rje3 result + sessionID + cost.
   - Start hidden b bla `&`: `npm run worker:start` (isolated DB) · `npm run worker:status` ·
     `npm run worker:stop`.
+  - `--simulate` = results predefined bla CLI (ghir l-tests); `--timeout`, `--model`,
+    `--agent`, `--no-auto` kaynin.
   - `npm run start:opencode &` kay-7ell console dyal `node.exe`; seddiha = worker kay-mut.
   - Launcher: `.claude/sync/start-opencode.mjs` (`windowsHide: true`, `detached`, pid + log).
-  - Ma-t-runni-ch l-simulator 3la live DB (y9der y-sr9 tasks); `--live` ghir b3da.
+  - Ma-t-runni-ch l-worker 3la live DB (y9der y-sr9 tasks); `--live` ghir b3da.
+  - `ONE_BRAIN_DISABLE=1` kay-t-passed l `opencode run` bach ma-y-spawnich room-daemon tani.

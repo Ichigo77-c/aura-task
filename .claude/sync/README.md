@@ -96,19 +96,28 @@ npm run room -- help
 
 ### Background worker (Windows)
 
-`opencode-worker.ts` is the legacy simulated worker. Start it once, hidden, from
-the repo root:
+`opencode-worker.ts` polls the room for tasks and executes them with the real
+OpenCode CLI (`opencode run --format json`; the prompt travels over stdin). The
+result — text, session id, cost — is posted back to the room.
 
 ```bash
-npm run worker:start    # detached + windowsHide, logs to .claude/sync/worker.log
+npm run worker:start                   # hidden background, isolated DB, real CLI
+npm run worker:start -- --live         # live room DB (the plugin may also handle tasks)
+npm run worker:start -- --simulate     # predefined results, no CLI call (tests only)
+npm run worker:start -- --timeout 600 --model provider/model#variant
 npm run worker:status
 npm run worker:stop
 ```
 
-Never start it with `npm run start:opencode &` in Git Bash: the extra `&`
-detaches the job and Windows opens a bare `node.exe` console window for the
-orphan. `scripts/one-brain-worker.mjs` handles detaching itself, so no `&` is
-needed.
+- `--auto` is on by default: a delegated task may edit files and run commands.
+  Use `--no-auto` to require permissions.
+- The CLI is resolved from `OPENCODE_BIN`, then `PATH`, then the desktop app
+  bundle (`%APPDATA%\ai.opencode.desktop\cli\*\opencode-cli.exe`).
+- `ONE_BRAIN_DISABLE=1` is passed to the child, so the one-brain plugin does not
+  start a second room daemon inside a headless run.
+- Never start it with `npm run start:opencode &` in Git Bash: the extra `&`
+  detaches the job and Windows opens a bare `node.exe` console window for the
+  orphan. The launcher detaches itself with `windowsHide: true`.
 
 ### Inside OpenCode
 
@@ -221,7 +230,8 @@ into the room.
 ├── claude-hook.ts
 ├── claude-adapter.ts        # legacy programmatic adapter
 ├── opencode-adapter.ts      # legacy programmatic adapter
-├── opencode-worker.ts       # simulated worker (tests)
+├── opencode-worker.ts       # task worker (real CLI, --simulate for tests)
+├── opencode-cli.ts          # `opencode run` wrapper (JSON, timeout, kill tree)
 ├── test-*.ts
 ├── run-*.mjs                # Windows-safe runners
 ├── sync.db                  # live room (gitignored)

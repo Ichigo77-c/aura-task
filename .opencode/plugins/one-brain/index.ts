@@ -28,6 +28,10 @@ type RoomMessage = {
 export default Plugin.define({
   id: "one-brain",
   async setup(ctx) {
+    // Headless `opencode run` calls spawned by the worker set ONE_BRAIN_DISABLE=1
+    // so they do not register a second agent or start a second room daemon.
+    if (process.env.ONE_BRAIN_DISABLE === "1") return
+
     const root = ctx.location.directory
     const tsxCli = path.join(root, ".claude", "sync", "node_modules", "tsx", "dist", "cli.mjs")
     const daemonScript = path.join(root, ".claude", "sync", "room-daemon.ts")

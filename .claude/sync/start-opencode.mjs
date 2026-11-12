@@ -28,15 +28,30 @@ const defaultDb = path.join(dir, "opencode-worker.db");
 const workerScript = "opencode-worker.ts";
 
 function parseArgs(argv) {
-  const args = {};
+  const args = { workerArgs: [] };
+  const passthrough = new Set(["--timeout", "--model", "--agent"]);
   for (let i = 0; i < argv.length; i++) {
     const token = argv[i];
-    if (token === "--status" || token === "--stop" || token === "--foreground" || token === "--live" || token === "--help" || token === "-h") {
+    if (
+      token === "--status" ||
+      token === "--stop" ||
+      token === "--foreground" ||
+      token === "--live" ||
+      token === "--simulate" ||
+      token === "--no-auto" ||
+      token === "--help" ||
+      token === "-h"
+    ) {
       args[token.replace(/^--?/, "")] = true;
+      if (token === "--simulate" || token === "--no-auto") args.workerArgs.push(token);
     } else if (token === "--db") {
       const value = argv[++i];
       if (!value) throw new Error("--db needs a path");
       args.db = value;
+    } else if (passthrough.has(token)) {
+      const value = argv[++i];
+      if (!value) throw new Error(`${token} needs a value`);
+      args.workerArgs.push(token, value);
     } else {
       throw new Error(`Unknown option: ${token}`);
     }
@@ -83,19 +98,24 @@ function resolveDb(args) {
 
 function help() {
   console.log(`Usage:
-  node start-opencode.mjs                start hidden simulator (isolated DB)
-  node start-opencode.mjs --live         start hidden simulator on the live room DB
+  node start-opencode.mjs                start hidden worker (isolated DB, real CLI)
+  node start-opencode.mjs --live         start hidden worker on the live room DB
+  node start-opencode.mjs --simulate     predefined results, no CLI call (tests only)
   node start-opencode.mjs --foreground   run in the current terminal
   node start-opencode.mjs --status       show pid, DB and recent log
   node start-opencode.mjs --stop         stop the background worker
-  node start-opencode.mjs --db <path>    use a specific database`);
+  node start-opencode.mjs --db <path>    use a specific database
+  node start-opencode.mjs --timeout <s>  per-task timeout in seconds (default 900)
+  node start-opencode.mjs --model <m>    provider/model#variant for the CLI
+  node start-opencode.mjs --agent <a>    OpenCode agent to use
+  node start-opencode.mjs --no-auto      do not auto-approve permissions`);
 }
 
 async function stopWorker() {
   const info = readPidFile();
   if (!info || !isRunning(info)) {
     fs.rmSync(pidFile, { force: true });
-    console.log("ℹ️  OpenCode simulator is not running.");
+    console.log("ℹ️  OpenCode worker is not running.");
     return 0;
   }
   if (process.platform === "win32") {
@@ -117,14 +137,15 @@ function printStatus() {
   const info = readPidFile();
   const running = isRunning(info);
   if (running) {
-    console.log(`✅ OpenCode simulator running (pid ${info.pid}).`);
+    console.log(`✅ OpenCode worker running (pid ${info.pid}).`);
+    console.log(`   Mode:      ${info.mode === "simulate" ? "simulate (no CLI)" : "real CLI"}`);
     console.log(`   DB:        ${info.db}`);
     console.log(`   Started:   ${info.startedAt}`);
     console.log(`   Log:       ${logFile}`);
-    console.log(`   Stop with: npm run worker:stop   (or npm run stop:opencode)`);
+    console.log(`   Stop with: npm run worker:stop`);
     tailLog();
   } else {
-    console.log("ℹ️  OpenCode simulator is not running.");
+    console.log("ℹ️  OpenCode worker is not running.");
     if (info) console.log(`   (stale pid file for pid ${info.pid} — use --stop to clear it)`);
   }
 }
@@ -150,11 +171,13 @@ async function main() {
   }
 
   const db = resolveDb(args);
+  const mode = args.simulate ? "simulate" : "cli";
   const env = { ...process.env, ONE_BRAIN_DB: db, ONE_BRAIN_WORKER_BACKGROUND: "1" };
+  const workerArgs = ["--import", "tsx", workerScript, ...args.workerArgs];
 
   if (args.foreground) {
-    console.log(`▶️  OpenCode simulator in foreground — DB: ${db}`);
-    const child = spawn(process.execPath, ["--import", "tsx", workerScript], {
+    console.log(`▶️  OpenCode worker in foreground (${mode}) — DB: ${db}`);
+    const child = spawn(process.execPath, workerArgs, {
       cwd: dir,
       env,
       stdio: "inherit",
@@ -166,14 +189,14 @@ async function main() {
 
   if (db === liveDb) {
     console.warn("⚠️  --live shares the room with the real OpenCode plugin.");
-    console.warn("    The simulator can consume tasks and return simulated results.");
+    console.warn("    The worker will consume tasks that the plugin may also handle.");
   }
 
   fs.mkdirSync(stateDir, { recursive: true });
   const logFd = fs.openSync(logFile, "a");
-  fs.writeSync(logFd, `\n=== start ${new Date().toISOString()} · db=${db} ===\n`);
+  fs.writeSync(logFd, `\n=== start ${new Date().toISOString()} · db=${db} · mode=${mode} ===\n`);
 
-  const child = spawn(process.execPath, ["--import", "tsx", workerScript], {
+  const child = spawn(process.execPath, workerArgs, {
     cwd: dir,
     env,
     detached: true,
@@ -190,7 +213,7 @@ async function main() {
 
   fs.writeFileSync(
     pidFile,
-    `${JSON.stringify({ pid: child.pid, db, startedAt: new Date().toISOString() }, null, 2)}\n`,
+    `${JSON.stringify({ pid: child.pid, db, mode, startedAt: new Date().toISOString() }, null, 2)}\n`,
     "utf8",
   );
 
@@ -203,10 +226,10 @@ async function main() {
     return 1;
   }
 
-  console.log(`✅ OpenCode simulator running in background (pid ${child.pid}).`);
+  console.log(`✅ OpenCode worker running in background (pid ${child.pid}, ${mode}).`);
   console.log(`   DB:   ${db}`);
   console.log(`   Log:  ${logFile}`);
-  console.log(`   Stop: npm run worker:stop   (or npm run stop:opencode)`);
+  console.log(`   Stop: npm run worker:stop`);
   return 0;
 }
 

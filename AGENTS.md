@@ -25,14 +25,21 @@ b messages.
 Qa3ida: ma-t-directch `.env`, credentials, wla user data l room. Redaction
 best-effort kayn, walakin machi garantie.
 
-### Simulator worker (machi l-OpenCode l-79i9i)
+### Task worker (executor)
 
-`opencode-worker.ts` ghir **simulator**: kay-rje3 result predefined w ma-kay-3ayetsh
-l-OpenCode CLI. L-integration l-79i9ia hiya l-plugin + `room-daemon.ts`.
+`opencode-worker.ts` kay-polli tasks men room w kay-nfEdhom b **l-OpenCode CLI l-79i9i**
+(`opencode run --format json --archived --auto`, l-prompt kaymchi 3la stdin).
+L-result (text + sessionID + cost) kay-rje3 l room.
 
-- Bach t-runni l-simulator b background **bla `&`**:
-  `npm run worker:start` (isolated DB), `npm run worker:status`, `npm run worker:stop`.
-- `&` kay-detachi l-job w Windows kay-7ell console dyal `node.exe`; ila sedditiha
-  l-worker kay-mut. L-launcher kaykhdem b `windowsHide: true` w kay-rje3 dghya.
-- Ma-t-runni-ch l-simulator 3la l-live DB: y9der y-consume tasks w y-rje3 results fake.
+- Run hidden **bla `&`**: `npm run worker:start` (isolated DB), `npm run worker:status`,
+  `npm run worker:stop`.
+- `--simulate` = l-qdim (results predefined, bla CLI) — ghir l-tests/demos.
+- `--timeout <s>` (default 900), `--model <provider/model#variant>`, `--agent <name>`,
+  `--no-auto` (ma-t-auto-approve-ch permissions).
+- `&` kay-detachi l-job w Windows kay-7ell console dyal `node.exe`; l-launcher
+  kaykhdem b `windowsHide: true` w kay-rje3 dghya.
+- `ONE_BRAIN_DISABLE=1` kay-t-passed l `opencode run` bach l-plugin ma-y-spawnich
+  room-daemon tani (loop).
+- Ma-t-runni-ch l-worker 3la l-live DB: y9der y-consume tasks li l-plugin kay-handlihom.
   `npm run worker:start -- --live` ghir ila bghitha b3da.
+- `--auto` kay-approve permissions → mat-3ti-ch tasks men source ma-ti9ch fiha.
