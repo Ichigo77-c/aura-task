@@ -3,6 +3,41 @@
   "permissions": {
     "defaultMode": "acceptEdits"
   },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/sync/node_modules/tsx/dist/cli.mjs .claude/sync/claude-hook.ts session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/sync/node_modules/tsx/dist/cli.mjs .claude/sync/claude-hook.ts prompt",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/sync/node_modules/tsx/dist/cli.mjs .claude/sync/claude-hook.ts stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:20128",
     "ANTHROPIC_AUTH_TOKEN": "omniroute",

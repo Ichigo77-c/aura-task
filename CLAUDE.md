@@ -32,3 +32,28 @@ Hada fichier kansajjlo fih kolchi li drna f l-projet bach mni t-t-mha l-chat wla
 
 ## 3. L-Build Status
 - `npm run build` daz mzian 100% b najaḥ bla hta chi error.
+
+## 4. One Brain Room (Claude Code + OpenCode)
+- **Room mshtarka** bin Claude Code w OpenCode f `.claude/sync/sync.db` (SQLite, WAL).
+- **Claude Code**: hooks f `.claude/settings.json` (`SessionStart`, `UserPromptSubmit`,
+  `Stop`) → `.claude/sync/claude-hook.ts`. Kay-sifto l-prompts w l-jawab l-akhir l room,
+  w kay-injectiw messages dyal OpenCode. Hooks ma-kay-blockiw-ch Claude (exit 0 dima).
+- **OpenCode**: plugin `.opencode/plugins/one-brain/index.ts` kay-t-charger automatiquement,
+  kay-spawni `.claude/sync/room-daemon.ts`, w kay-expose tools:
+  `onebrain_send`, `onebrain_inbox`, `onebrain_status`.
+- **Messages dyal OpenCode**: kay-banou f session b `synthetic` (`resume:false`) — kay-banou
+  walakin ma-kay-triggeriw-ch turn zyada. L-jawab l-akhir kay-t-share automatiquement mnin
+  session y-wli idle.
+- **CLI**: `npm run room -- say|inbox|task|result|status|agents|log ...`
+- **Tests**: `cd .claude/sync && npm run build && npm run test:broker && npm run test:cross-process && npm run test:claude`
+  (kolhom kay-khdmo 3la Windows w kay-sta3mlo DB m-fassla via `ONE_BRAIN_DB`).
+- **Docs**: `.claude/sync/README.md`.
+- **Sécurité**: ma-t-directch `.env` wla credentials. Redaction best-effort kayn walakin
+  machi garantie.
+- **Worker simulator**: `opencode-worker.ts` ghir simulator (result predefined, ma-kay-3ayetsh
+  l-OpenCode CLI). L-integration l-79i9ia = plugin + `room-daemon.ts`.
+  - Start hidden b bla `&`: `npm run worker:start` (isolated DB) · `npm run worker:status` ·
+    `npm run worker:stop`.
+  - `npm run start:opencode &` kay-7ell console dyal `node.exe`; seddiha = worker kay-mut.
+  - Launcher: `.claude/sync/start-opencode.mjs` (`windowsHide: true`, `detached`, pid + log).
+  - Ma-t-runni-ch l-simulator 3la live DB (y9der y-sr9 tasks); `--live` ghir b3da.

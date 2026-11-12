@@ -1,0 +1,26 @@
+{
+  "name": "@aura-tasks/sync-bridge",
+  "version": "1.0.0",
+  "description": "Real synchronization bridge between Claude Code and OpenCode",
+  "main": "broker.ts",
+  "scripts": {
+    "build": "tsc",
+    "test:broker": "node run-test-broker.mjs",
+    "test:claude": "node run-claude-test.mjs",
+    "test:cross-process": "node run-cross-process.mjs",
+    "test:cross-p1": "tsx test-cross-process-p1.ts",
+    "test:cross-p2": "tsx test-cross-process-p2.ts",
+    "room": "node node_modules/tsx/dist/cli.mjs room.ts",
+    "room:daemon": "node node_modules/tsx/dist/cli.mjs room-daemon.ts",
+    "start:opencode": "node start-opencode.mjs",
+    "start:opencode:fg": "node start-opencode.mjs --foreground",
+    "stop:opencode": "node start-opencode.mjs --stop",
+    "status:opencode": "node start-opencode.mjs --status"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -8,9 +8,14 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
+    "worker:start": "node .claude/sync/start-opencode.mjs",
+    "worker:status": "node .claude/sync/start-opencode.mjs --status",
+    "worker:stop": "node .claude/sync/start-opencode.mjs --stop",
     "postinstall": "prisma generate",
     "electron:dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:build": "next build && electron-builder"
+    "electron:build": "next build && electron-builder",
+    "room": "node .claude/sync/node_modules/tsx/dist/cli.mjs .claude/sync/room.ts",
+    "room:watch": "node .claude/sync/node_modules/tsx/dist/cli.mjs .claude/sync/room.ts log --limit 5"
   },
   "build": {
     "appId": "com.auratasks.app",

@@ -41,3 +41,22 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# one brain room (local state)
+.claude/sync/sync.db
+.claude/sync/sync.db-wal
+.claude/sync/sync.db-shm
+.claude/sync/test-*.db
+.claude/sync/test-*.db-wal
+.claude/sync/test-*.db-shm
+.claude/sync/*.log
+.claude/sync/worker.pid
+.claude/sync/opencode-worker.db*
+.claude/sync/node_modules/
+.claude/sync/state/
+.claude/sync/dist/
+.claude/sync/.tmp-*
+
+# screenshots
+Screenshot*.png
+screenshot.png
