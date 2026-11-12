@@ -30,5 +30,14 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "prisma.config.ts"]
+  "exclude": [
+    "node_modules",
+    "prisma.config.ts",
+    ".claude/**/*",
+    ".opencode/**/*",
+    ".agents/**/*",
+    ".cursor/**/*",
+    ".devin/**/*",
+    "send-to-opencode.ts"
+  ]
 }

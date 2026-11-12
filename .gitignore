@@ -60,3 +60,12 @@ next-env.d.ts
 # screenshots
 Screenshot*.png
 screenshot.png
+
+# Android / Capacitor
+# signing config + keystores stay local
+android/keystore.properties
+*.keystore
+*.jks
+# generated desktop/APK/AAB artifacts
+/dist/
+/electron-build.log

@@ -1,0 +1,58 @@
+name: Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      pwa_url:
+        description: "Production PWA URL the APK should load"
+        required: true
+        type: string
+  push:
+    branches: [main]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    env:
+      # Point the APK at your deployed PWA. Override in repo settings/vars.
+      CAPACITOR_WEB_URL: ${{ github.event.inputs.pwa_url || vars.PWA_URL || 'https://aura-task-seven.vercel.app' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # Self-signed keystore so CI can produce a signed release APK without
+      # secrets. For store releases, replace this with your real keystore.
+      - name: Create CI keystore
+        run: |
+          mkdir -p android/keystore
+          keytool -genkey -v -keystore android/keystore/ci.keystore \
+            -alias ci -keyalg RSA -keysize 2048 -validity 7300 \
+            -storepass androidci -keypass androidci
+          cat > android/keystore.properties <<EOF
+          storeFile=../keystore/ci.keystore
+          storePassword=androidci
+          keyAlias=ci
+          keyPassword=androidci
+          EOF
+
+      - name: Build debug + release APKs
+        run: |
+          node scripts/android-apk.mjs
+          node scripts/android-apk.mjs --release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: aura-tasks-apk
+          path: dist/android/*.apk

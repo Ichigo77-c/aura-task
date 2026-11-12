@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 /**
  * Desktop App Launcher Download Endpoint
@@ -14,7 +14,8 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(req: Request) {
   try {
-    const productionUrl = process.env.NEXTAUTH_URL || "https://taskflow-henna-phi.vercel.app";
+    const productionUrl =
+      process.env.NEXTAUTH_URL || "https://aura-task-seven.vercel.app";
 
     // Windows Batch Script - Can be converted to .exe
     const batchScript = `@echo off

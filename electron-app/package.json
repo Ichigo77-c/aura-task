@@ -1,0 +1,7 @@
+{
+  "name": "aura-tasks-desktop",
+  "version": "1.0.0",
+  "description": "Aura Tasks desktop client",
+  "main": "main.js",
+  "private": true
+}
