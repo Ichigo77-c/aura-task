@@ -5,7 +5,6 @@ import { authOptions } from "@/lib/auth";
 import DashboardNav from "@/components/shared/dashboard-nav";
 import { CommandPalette } from "@/components/shared/command-palette";
 
-export const instant = false;
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const session = await getServerSession(authOptions);

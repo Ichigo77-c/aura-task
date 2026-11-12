@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 const MAX_PROJECTS = 8;
 const MAX_TASKS = 12;
 

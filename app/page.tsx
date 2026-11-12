@@ -66,10 +66,9 @@ export default function Home() {
                 <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Download Desktop
+                Download Desktop App
               </Button>
             </a>
-            <InstallAppButton variant="outline" size="lg" className="w-full sm:w-auto text-base px-8 py-6 border-line-strong bg-surface-soft/60 hover:bg-surface-soft text-fg rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:-translate-y-1" />
           </div>
         </section>
 

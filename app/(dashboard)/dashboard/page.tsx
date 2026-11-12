@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export const instant = false;
 
 async function getDashboardData(userId: string) {
   const [projects, tasks, recentActivities] = await Promise.all([
